@@ -1,11 +1,12 @@
+{{#each this}}
 <li class="menu__item">
     <article class="card">
-        <img src="{{image}}"" alt=" {{name}}" class="card__image" />
+        <img src={{image}} alt={{name}} class="card__image" />
         <div class="card__content">
             <h2 class="card__name">{{name}}</h2>
             <p class="card__price">
                 <i class="material-icons"> monetization_on </i>
-                {{price}}
+                {{price}} кредитов
             </p>
 
             <p class="card__descr">
@@ -13,14 +14,9 @@
             </p>
 
             <ul class="tag-list">
-                <li class="tag-list__item">{{ingredients}}</li>
-
-                {{!-- <li class="tag-list__item">Картофель</li>
-                <li class="tag-list__item">Чеснок</li>
-                <li class="tag-list__item">Сметана</li>
-                <li class="tag-list__item">Бекон</li>
-                <li class="tag-list__item">Твердый сыр</li>
-                <li class="tag-list__item">Зеленый лук</li> --}}
+                {{#each ingredients}}
+                <li class="tag-list__item">{{this}}</li>
+                {{/each}}
             </ul>
         </div>
 
@@ -30,3 +26,4 @@
         </button>
     </article>
 </li>
+{{/each}}
