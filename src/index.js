@@ -7,29 +7,54 @@ const refs = {
     menu: document.querySelector('.js-menu'),
 };
 
+// робить розмітку
 const markup = cardTemplate(cardsData);
 
 refs.menu.insertAdjacentHTML('beforeend', markup);
 
-
+// робить тему
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
 
+refs.switch.addEventListener('change', onBtnChangeTheme);
 
-refs.switch.addEventListener('change', onBtnChange);
+function onBtnChangeTheme(evt) {
+    evt.preventDefault();
 
-const isChecked = refs.switch.checked;
-
-function onBtnChange() {
-    if (isChecked) {
-        refs.body.classList.add(Theme.DARK);
+    if (evt.target.checked) {
+        onDarkTheme();
     }
     else {
-        refs.body.classList.add(Theme.LIGHT);
-
+        onLightTheme();
     }
 };
 
+    getValueLocalStorage();
+
+function onLightTheme() {
+    refs.body.classList.remove(Theme.DARK);
+    refs.body.classList.add(Theme.LIGHT);
+    localStorage.setItem("theme", Theme.LIGHT);
+    }
+
+function onDarkTheme() {
+    refs.body.classList.remove(Theme.LIGHT);
+    refs.body.classList.add(Theme.DARK);
+    localStorage.setItem("theme", Theme.DARK);
+}
+
+function getValueLocalStorage() {
+    const currentValueLocalStorage = localStorage.getItem('theme');
+
+        if (currentValueLocalStorage === Theme.DARK) {
+            refs.body.classList.add(Theme.DARK);
+            refs.switch.checked = true;
+    }
+    
+        if (currentValueLocalStorage === Theme.LIGHT) {
+            refs.body.classList.add(Theme.LIGHT);
+        }
+    }
 
